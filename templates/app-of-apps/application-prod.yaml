@@ -1,23 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{values.name}}
+  name: {{values.name}}-prod
   namespace: {{values.argoNS}}
-  labels:
-    argocd/app-name: {{values.name}}
-    janus-idp.io/tekton: {{values.name}}
-    backstage.io/kubernetes-id: {{values.name}}
-    backstage.io/kubernetes-namespace: {{values.namespace}} 
-    app.kubernetes.io/part-of: {{values.name}}
   finalizers: ["resources-finalizer.argocd.argoproj.io"] 
 spec:
   project: {{values.argoProject}}
   source:
-    path: ./app/overlays
+    path: {{values.argoComponentOverlays}}/prod
     repoURL: {{values.repoURL}}.git
     targetRevision: main
   destination:
-    namespace: {{values.namespace}}
+    namespace: {{values.namespace}}-prod
     server: https://kubernetes.default.svc
   syncPolicy:
     managedNamespaceMetadata:

@@ -12,5 +12,5 @@ spec:
   template: 
     spec:
       containers:
-      - image: quay.io/ai-lab/codegen:latest # use pre-built to bootstrap 
-        name: codegen-inference 
+      - image: {{values.appContainer}} # use pre-built to bootstrap 
+        name: app-inference 

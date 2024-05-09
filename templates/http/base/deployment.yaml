@@ -24,7 +24,7 @@ spec:
     spec:
       initContainers:
       - name: model-file
-        image: quay.io/yangcao/granite-7b-lab:latest
+        image: {{values.initContainer}}
         command: ['/usr/bin/install', "/model/model.file", "/shared/"]
         volumeMounts:
         - name: model-file
@@ -32,24 +32,24 @@ spec:
       containers:
       - env:
         - name: MODEL_ENDPOINT
-          value: http://0.0.0.0:8001
-        image: quay.io/ai-lab/chatbot:latest
-        name: chatbot-inference
+          value: http://0.0.0.0:{{values.modelServicePort}}
+        image:  {{values.appContainer}}
+        name: app-inference
         ports:
-        - containerPort: 8501
+        - containerPort: {{values.appPort}}
         securityContext:
           runAsNonRoot: true
       - env:
         - name: HOST
           value: "0.0.0.0"
         - name: PORT
-          value: "8001"
+          value: "{{values.modelServicePort}}"
         - name: MODEL_PATH
           value: /model/model.file
-        image: quay.io/ai-lab/llamacpp_python:latest
-        name: chatbot-model-service
+        image: {{values.modelServiceContainer}}
+        name: app-model-service
         ports:
-        - containerPort: 8001
+        - containerPort: {{values.modelServicePort}}
         securityContext:
           runAsNonRoot: true
         volumeMounts:
