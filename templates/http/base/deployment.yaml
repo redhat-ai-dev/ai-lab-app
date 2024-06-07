@@ -55,7 +55,7 @@ spec:
             "--download-dir",
             "/models-cache",
             "--max-model-len",
-            "{{values.maxModelLenth}}"]
+            "{{values.maxModelLength}}"]
         resources:
           limits:
             nvidia.com/gpu: '1'
