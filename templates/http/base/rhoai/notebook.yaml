@@ -8,7 +8,6 @@ metadata:
   name: {{values.name}}
   namespace: {{values.dsp}}
   labels:
-    app: {{values.name}}
     opendatahub.io/dashboard: 'true'
     opendatahub.io/odh-managed: 'true'
 spec:

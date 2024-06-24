@@ -2,7 +2,6 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   annotations:
-    openshift.io/description: ''
     openshift.io/display-name: {{values.name}}
   name: {{values.name}}
   namespace: {{values.dsp}}

@@ -6,5 +6,4 @@ metadata:
     kubernetes.io/metadata.name: {{values.dsp}}
     opendatahub.io/dashboard: 'true'
   annotations:
-    openshift.io/description: ''
     openshift.io/display-name: {{values.dsp}}
