@@ -4,11 +4,11 @@ metadata:
   annotations:
     notebooks.opendatahub.io/inject-oauth: 'true'
     opendatahub.io/image-display-name: Minimal Python
-    openshift.io/display-name: ${{ values.name }}
-  name: ${{ values.name }}
-  namespace: ${{ values.namespace }}
+    openshift.io/display-name: {{values.name}}
+  name: {{values.name}}
+  namespace: {{values.namespace}}
   labels:
-    app: ${{ values.name }}
+    app: {{values.name}}
     opendatahub.io/dashboard: 'true'
     opendatahub.io/odh-managed: 'true'
 spec:
@@ -25,18 +25,18 @@ spec:
           readinessProbe:
             failureThreshold: 3
             httpGet:
-              path: /notebook/${{ values.namespace }}/${{ values.name }}/api
+              path: /notebook/{{values.namespace}}/{{values.name}}/api
               port: notebook-port
               scheme: HTTP
             initialDelaySeconds: 10
             periodSeconds: 5
             successThreshold: 1
             timeoutSeconds: 1
-          name: ${{ values.name }}
+          name: {{values.name}}
           livenessProbe:
             failureThreshold: 3
             httpGet:
-              path: /notebook/${{ values.namespace }}/${{ values.name }}/api
+              path: /notebook/{{values.namespace}}/{{values.name}}/api
               port: notebook-port
               scheme: HTTP
             initialDelaySeconds: 10
@@ -47,15 +47,15 @@ spec:
             - name: NOTEBOOK_ARGS
               value: |-
                 --ServerApp.port=8888
-                --ServerApp.base_url=/notebook/${{ values.namespace }}/${{ values.name }}
+                --ServerApp.base_url=/notebook/{{values.namespace}}/{{values.name}}
                 --ServerApp.quit_button=False
             - name: JUPYTER_IMAGE
               value: 'image-registry.openshift-image-registry.svc:5000/redhat-ods-applications/s2i-minimal-notebook:2024.1'
             - name: MODEL_ENDPOINT
-              value: http://${{ values.name }}-model-server.${{ values.namespace }}.svc.cluster.local:${{ values.modelServicePort }}
+              value: http://{{values.name}}-model-server.{{values.namespace}}.svc.cluster.local:{{values.modelServicePort}}
             {%- if values.vllmSelected %}
             - name: MODEL_NAME
-              value: "${{ values.vllmModelName }}"
+              value: "{{values.vllmModelName}}"
             {%- endif %}
           ports:
             - containerPort: 8888
@@ -64,7 +64,7 @@ spec:
           imagePullPolicy: Always
           volumeMounts:
             - mountPath: /opt/app-root/src
-              name: ${{ values.name }}-rhoai
+              name: {{values.name}}-rhoai
             - mountPath: /dev/shm
               name: shm
           image: 'image-registry.openshift-image-registry.svc:5000/redhat-ods-applications/s2i-minimal-notebook:2024.1'
@@ -114,19 +114,19 @@ spec:
               name: tls-certificates
           image: 'registry.redhat.io/openshift4/ose-oauth-proxy@sha256:4bef31eb993feb6f1096b51b4876c65a6fb1f4401fee97fa4f4542b6b7c9bc46'
       enableServiceLinks: false
-      serviceAccountName: ${{ values.name }}
+      serviceAccountName: {{values.name}}
       volumes:
-        - name: ${{ values.name }}-rhoai
+        - name: {{values.name}}-rhoai
           persistentVolumeClaim:
-            claimName: ${{ values.name }}-rhoai
+            claimName: {{values.name}}-rhoai
         - emptyDir:
             medium: Memory
           name: shm
         - name: oauth-config
           secret:
             defaultMode: 420
-            secretName: ${{ values.name }}-oauth-config
+            secretName: {{values.name}}-oauth-config
         - name: tls-certificates
           secret:
             defaultMode: 420
-            secretName: ${{ values.name }}-tls
+            secretName: {{values.name}}-tls
