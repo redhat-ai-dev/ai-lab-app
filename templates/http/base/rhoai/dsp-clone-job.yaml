@@ -5,7 +5,7 @@ metadata:
 spec:  
   template:         
     metadata:
-      name: initialize-dsp-{{values.appName}}
+      name: dsp-clone-job-{{values.appName}}
     spec:  
       serviceAccountName: {{values.name}}-dsp-job
       containers:
