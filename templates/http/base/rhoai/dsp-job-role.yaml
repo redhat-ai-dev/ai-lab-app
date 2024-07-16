@@ -20,7 +20,7 @@ rules:
       - list
       - watch
     apiGroups:
-      - "apps/v1"
+      - "apps"
     resources:
       - statefulsets
   - apiGroups: [""]
@@ -29,3 +29,52 @@ rules:
   - apiGroups: [""]
     resources: ["pods/exec"]
     verbs: ["get", "create"]
+  # The following roles ensure that the DSP job can set ownerreferences on notebook CRs
+  - verbs:
+      - get
+      - list
+      - watch
+      - delete
+      - update
+      - patch
+      - create
+    apiGroups:
+      - "kubeflow.org"
+    resources:
+      - notebooks
+  - verbs:
+      - get
+      - list
+      - delete
+      - create
+      - watch
+      - update
+      - patch
+    apiGroups:
+      - ""
+    resources:
+      - serviceaccounts
+  - verbs:
+      - get
+      - create
+      - list
+      - delete
+      - update
+      - watch
+      - patch
+    apiGroups:
+      - ""
+    resources:
+      - persistentvolumeclaims
+  - verbs:
+      - get
+      - create
+      - list
+      - delete
+      - update
+      - watch
+      - patch
+    apiGroups:
+      - "batch"
+    resources:
+      - jobs
