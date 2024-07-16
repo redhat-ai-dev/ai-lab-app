@@ -122,6 +122,11 @@ spec:
             annotations:
               openshift.io/display-name: {{values.name}}-rhoai
             name: {{values.name}}-rhoai
+            ownerReferences:
+              - apiVersion: v1
+                kind: ServiceAccount
+                name: {{values.name}}-dsp-job
+                uid: $SA_UID
             labels:
               opendatahub.io/dashboard: 'true'
           spec:
