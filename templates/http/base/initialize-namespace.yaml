@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1
 kind: PipelineRun
 metadata:
-  name: {{values.name}}-namespace-setup
+  name: {{values.name}}-rhtap-dev-namespace-setup
 spec:
   pipelineSpec:
     tasks:
