@@ -8,7 +8,7 @@ commonLabels:
   app.kubernetes.io/part-of: {{values.name}}
 resources: 
 - initialize-namespace.yaml
-{%- if values.vllmSelected and not values.existingModelServer %}
+{%- if values.vllmSelected %}
 - pvc.yaml
 {%- endif %}
 {%- if not values.existingModelServer %}
