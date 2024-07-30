@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - image:  {{values.appContainer}}
-        name: app-inference
+        name: app-interface
         envFrom:
         - configMapRef:
             name: {{values.name}}-model-config
@@ -32,3 +32,11 @@ spec:
         - containerPort: {{values.appPort}}
         securityContext:
           runAsNonRoot: true
+      {%- if values.dbRequired %}
+      - image: {{values.dbContainer}}
+        name: database
+        ports:
+        - containerPort: {{values.dbPort}}
+        securityContext:
+          runAsNonRoot: true
+      {%- endif %}
