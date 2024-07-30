@@ -8,11 +8,13 @@ commonLabels:
   app.kubernetes.io/part-of: {{values.name}}
 resources: 
 - initialize-namespace.yaml
-{%- if values.vllmSelected %}
+{%- if values.vllmSelected and not values.existingModelServer %}
 - pvc.yaml
 {%- endif %}
+{%- if not values.existingModelServer %}
 - deployment-model-server.yaml
 - service-model-server.yaml
+{%- endif %}
 - deployment.yaml
 - route.yaml
 - service.yaml
