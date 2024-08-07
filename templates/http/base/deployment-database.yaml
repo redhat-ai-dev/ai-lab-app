@@ -7,32 +7,25 @@ metadata:
     tad.gitops.set/replicas: ".spec.replicas"
     tad.gitops.get/replicas: ".spec.replicas" 
   labels: 
-    app.kubernetes.io/instance: {{values.name}}
+    app.kubernetes.io/instance: {{values.name}}-database
     app.kubernetes.io/managed-by: kustomize
-    app.kubernetes.io/name:  {{values.name}}
+    app.kubernetes.io/name: {{values.name}}-database
     app.kubernetes.io/part-of: {{values.name}}  
-  name: {{values.name}}
+  name: {{values.name}}-database
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/instance:  {{values.name}} 
+      app.kubernetes.io/instance: {{values.name}}-database
   template:
     metadata: 
       labels:
-        app.kubernetes.io/instance:  {{values.name}}
+        app.kubernetes.io/instance: {{values.name}}-database
     spec:
       containers:
-      - image:  {{values.appContainer}}
-        name: app-inference
-        envFrom:
-        - configMapRef:
-            name: {{values.name}}-model-config
-        {%- if values.dbRequired %}
-        - configMapRef:
-            name: {{values.name}}-database-config
-        {%- endif %}
+      - image: {{values.dbContainer}}
+        name: database
         ports:
-        - containerPort: {{values.appPort}}
+        - containerPort: {{values.dbPort}}
         securityContext:
           runAsNonRoot: true

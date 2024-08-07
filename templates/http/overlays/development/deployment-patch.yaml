@@ -13,4 +13,4 @@ spec:
     spec:
       containers:
       - image: {{values.appContainer}} # use pre-built to bootstrap 
-        name: app-interface 
+        name: app-inference 
