@@ -10,7 +10,7 @@ spec:
       serviceAccountName: {{values.name}}-dsp-job
       containers:
       - name: initialize-dsp
-        image: quay.io/redhat-ai-dev/appstudio-utils:5bd7d6cb0b17f9f2eab043a8ad16ba3d90551bc2
+        image: quay.io/redhat-ai-dev/utils:latest
         command:
         - /bin/bash
         - -c
