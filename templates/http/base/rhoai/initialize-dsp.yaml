@@ -16,6 +16,11 @@ spec:
         - /bin/bash
         - -c
         - |
+          # Wait for the image stream creation job to finish
+          echo "Wait for the Image Stream Job"
+          oc wait --for=condition=complete job/create-imagestream-{{values.appName}}
+          echo "Done"
+          
           # Wait for the NS initialize job to finish
           echo "Wait for NS Job"
           oc wait --for=condition=complete job/initialize-namespace-{{values.appName}}
