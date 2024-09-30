@@ -34,7 +34,7 @@ spec:
         {%- endif %}
         {%- if values.includeModelEndpointSecret %}
         env:
-        - name: MODEL_ENDPOINT_API_KEY
+        - name: MODEL_ENDPOINT_BEARER
           valueFrom:
             secretKeyRef:
               name: {{ values.modelEndpointSecretName }}
