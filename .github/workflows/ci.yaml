@@ -1,0 +1,25 @@
+---
+name: CI
+
+# Triggers the workflow on push or pull request events but only for the main branch
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  yaml-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: comment jinja syntax  # disguise non-standard yaml syntax as comments for linting
+        run: |
+          find . -regextype egrep -regex '.*ya?ml$' -not \( -path './.github*' \)|while read file; do
+            sed -i 's/{%-/# {%-/g' $file
+          done
+      - name: lint
+        uses: ibiqlik/action-yamllint@v3
+        with:
+          format: github
+          no_warnings: true

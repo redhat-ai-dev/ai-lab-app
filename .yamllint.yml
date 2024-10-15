@@ -1,0 +1,8 @@
+---
+extends: default
+rules:
+  line-length: disable
+  key-duplicates:
+    ignore: |
+      templates/http/base/deployment-model-server.yaml
+      templates/http/base/model-config.yaml
