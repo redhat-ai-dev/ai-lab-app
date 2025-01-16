@@ -1,0 +1,26 @@
+name: CI
+
+# Triggers the workflow on push or pull request events but only for the main branch
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  yaml-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: skip checking conditional syntax
+        working-directory: ./templates
+        run: |
+          find . -regextype egrep -regex '.*ya?ml$'|while read file; do
+            sed -i '/^\(\s*\)\({%-.*\)$/d' $file
+          done
+      - name: yaml format
+        run: |
+          curl -L -O https://github.com/google/yamlfmt/releases/download/v0.15.0/yamlfmt_0.15.0_Linux_x86_64.tar.gz
+          tar -xf yamlfmt_0.15.0_Linux_x86_64.tar.gz
+          chmod +x yamlfmt
+          ./yamlfmt -lint
