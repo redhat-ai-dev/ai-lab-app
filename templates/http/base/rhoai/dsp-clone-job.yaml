@@ -1,13 +1,13 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: 'dsp-clone-job-{{values.appName}}'
+  name: dsp-clone-job-{{values.appName}}
 spec:
   template:
     metadata:
-      name: 'dsp-clone-job-{{values.appName}}'
+      name: dsp-clone-job-{{values.appName}}
     spec:
-      serviceAccountName: '{{values.name}}-dsp-job'
+      serviceAccountName: {{values.name}}-dsp-job
       containers:
         - name: initialize-dsp
           image: quay.io/redhat-ai-dev/utils:latest
