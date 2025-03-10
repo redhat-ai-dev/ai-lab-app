@@ -12,12 +12,11 @@ spec:
     targetRevision: main
   destination:
   {%- if values.deployOnRemoteCluster %}
-    namespace: {{values.remoteClusterNamespace}}
     server: {{values.remoteClusterAPIUri}}
   {%- else %}
-    namespace: {{values.namespace}}
     server: https://kubernetes.default.svc
   {%- endif %}
+    namespace: {{values.namespace}}
   syncPolicy:
     managedNamespaceMetadata:
       labels:
