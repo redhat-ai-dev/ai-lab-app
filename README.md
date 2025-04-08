@@ -1,15 +1,14 @@
-# ai-lab-template-gitops
+# GitOps For Software Templates
 
-# Gitops Repo Patterns
+This repository contains HTTP GitOps components for use with AI Software Templates. 
 
-This repository contains an HTTP Gitops repository format component for use as the AI-Lab Gitops template.
+## Dependent Repositories
 
-## HTTP
+These definitons are currently being used in:
 
-This contains a deployment with the following characteristics:
+- [https://github.com/redhat-ai-dev/ai-lab-template](https://github.com/redhat-ai-dev/ai-lab-template)
+- [https://github.com/redhat-ai-dev/ai-lab-template-experiment](https://github.com/redhat-ai-dev/ai-lab-template-experiment)
 
-**Model service image** `{{values.modelServiceContainer}}` **listening on port** `{{values.modelServicePort}}`.
+## Contributing
 
-**App interface image** `{{values.appContainer}}` **listening on port** `{{values.appPort}}` for service and routing.
-
-This matches the current AI-Lab software template default deployment.
+When making a change to [./templates/app-of-apps](./templates/app-of-apps/) or [./templates/http](./templates/http/), please ensure that any necessary changes to documentation are also made to repositories listed under [Dependent Repositories](#dependent-repositories).
