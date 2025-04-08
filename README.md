@@ -11,4 +11,4 @@ These definitons are currently being used in:
 
 ## Contributing
 
-When making a change to [./templates/app-of-apps](./templates/app-of-apps/) or [./templates/http](./templates/http/), please ensure that any changes affecting how these definitions work are accompanied by updates to the dcoumentation in the repositories listed under [Dependent Repositories](#dependent-repositories).
+When making a change to [./templates/app-of-apps](./templates/app-of-apps/) or [./templates/http](./templates/http/), please ensure that any changes affecting how these definitions work are accompanied by updates to the documentation in the repositories listed under [Dependent Repositories](#dependent-repositories).
