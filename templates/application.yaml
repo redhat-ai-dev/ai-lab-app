@@ -3,11 +3,9 @@ kind: Application
 metadata:
   name: {{values.name}}
   namespace: {{values.argoNS}}
-  {%- if values.argoLabels | length > 0 %}
+  {%- if values.includeArgoLabel %}
   labels:
-    {%- for argoLabel in values.argoLabels %}
-    {{argoLabel.label}}: {{argoLabel.value}}
-    {%- endfor %}
+    {{values.argoAppLabel}}: {{values.argoAppLabelValue}}
   {%- endif %}
   finalizers: ["resources-finalizer.argocd.argoproj.io"]
 spec:
