@@ -1,5 +1,8 @@
 # GitOps For Software Templates
 
+> [!WARNING]
+> This repository has been retired and will no longer be maintained. It has been moved to [redhat-developer/rhdh-ai-template](https://github.com/redhat-developer/rhdh-ai-template).
+
 This repository contains HTTP GitOps components for use with AI Software Templates. 
 
 ## Dependent Repositories
